@@ -1,19 +1,19 @@
 const canvas = document.getElementById('radarCanvas');
 const ctx = canvas.getContext('2d');
+const DISTANCIA_CRITICA = 50;
 
 let pontos = [];
 let parMaisProximo = null;
 
 function desenharRadar() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const centroX = canvas.width / 2;
     const centroY = canvas.height / 2;
 
-    ctx.strokeStyle = 'rgba(14, 165, 233, 0.15)';
+    ctx.strokeStyle = 'rgba(14, 165, 233, 0.15)'; 
     ctx.lineWidth = 1;
     for (let r = 50; r < canvas.width / 2; r += 70) {
         ctx.beginPath();
@@ -27,24 +27,34 @@ function desenharRadar() {
     ctx.stroke();
 
     pontos.forEach(p => {
-        ctx.fillStyle = '#0ea5e9';
+        ctx.fillStyle = '#0ea5e9'; 
         ctx.beginPath();
         ctx.arc(p.x, p.y, 4, 0, 2 * Math.PI);
         ctx.fill();
     });
 
     if (parMaisProximo) {
-        ctx.strokeStyle = '#f01c1c';
-        ctx.lineWidth = 2;
+
+        const emPerigo = parMaisProximo.distancia <= DISTANCIA_CRITICA;
+
+        const corDestaque = emPerigo ? '#f01c1c' : '#f59e0b';
+
+        ctx.strokeStyle = corDestaque; 
+        ctx.lineWidth = emPerigo ? 2 : 1.5;
+
+        if (!emPerigo) ctx.setLineDash([5, 5]); 
+        
         ctx.beginPath();
         ctx.moveTo(parMaisProximo.aviao_1.x, parMaisProximo.aviao_1.y);
         ctx.lineTo(parMaisProximo.aviao_2.x, parMaisProximo.aviao_2.y);
         ctx.stroke();
+        
+        ctx.setLineDash([]);
 
         [parMaisProximo.aviao_1, parMaisProximo.aviao_2].forEach(p => {
-            ctx.fillStyle = '#f01c1c';
+            ctx.fillStyle = corDestaque;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 6, 0, 2 * Math.PI);
+            ctx.arc(p.x, p.y, emPerigo ? 6 : 5, 0, 2 * Math.PI);
             ctx.fill();
         });
     }
@@ -88,8 +98,15 @@ function atualizarPainelAlerta(data) {
         return;
     }
 
-    painel.className = "alerta status-perigo";
-    textoStatus.innerHTML = "⚠️ <strong>ALERTA DE COLISÃO IMINENTE!</strong>";
+    const emPerigo = data.distancia <= DISTANCIA_CRITICA;
+
+    if (emPerigo) {
+        painel.className = "alerta status-perigo";
+        textoStatus.innerHTML = "⚠️ <strong>ALERTA DE COLISÃO IMINENTE!</strong>";
+    } else {
+        painel.className = "alerta status-monitoramento";
+        textoStatus.innerHTML = "<strong>Espaço aéreo sob controle.</strong><br>Aeronaves mais próximas:";
+    }
     
     document.getElementById('valDistancia').innerText = data.distancia.toFixed(2);
     document.getElementById('a1x').innerText = data.aviao_1.x.toFixed(0);

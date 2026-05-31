@@ -178,6 +178,11 @@ button:hover {
     cursor: crosshair;
 }
 
+.status-monitoramento {
+    background-color: var(--bg-alerta-normal);
+    border-left-color: var(--laranja-aviso);
+}
+
 @keyframes piscar-alerta {
     0% { box-shadow: 0 0 5px var(--glow-vermelho-fraco); }
     100% { box-shadow: 0 0 20px var(--glow-vermelho-forte); }
