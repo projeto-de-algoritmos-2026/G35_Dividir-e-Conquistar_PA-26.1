@@ -7,5 +7,38 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    </body>
+    <div class="container">
+        <header>
+            <h1>Radar Aéreo</h1>
+        </header>
+
+        <main class="painel-principal">
+            <div class="radar-wrapper">
+                <canvas id="radarCanvas" width="600" height="600"></canvas>
+            </div>
+
+            <div class="controles">
+                <h2>Painel de Controle</h2>
+                <div class="botoes">
+                    <button id="btnAdicionar">Gerar 50 Aviões</button>
+                    <button id="btnLimpar" class="btn-secundario">Limpar Radar</button>
+                </div>
+                
+                <p class="instrucao">Clique no radar para adicionar aviões manualmente.</p>
+
+                <div id="painelAlerta" class="alerta status-normal">
+                    <h3>Status do Espaço Aéreo</h3>
+                    <p id="textoStatus">Aguardando aviões...</p>
+                    <div id="dadosConflito" class="escondido">
+                        <p><strong>Distância Crítica:</strong> <span id="valDistancia">0</span> u</p>
+                        <p><strong>Avião 1:</strong> X: <span id="a1x">0</span>, Y: <span id="a1y">0</span></p>
+                        <p><strong>Avião 2:</strong> X: <span id="a2x">0</span>, Y: <span id="a2y">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='radar.js') }}"></script>
+</body>
 </html>
