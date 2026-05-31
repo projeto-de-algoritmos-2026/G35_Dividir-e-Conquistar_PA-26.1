@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+:root {
+
+    --bg-body: #05070a;
+    --bg-radar: #000000;
+    --bg-painel: #0a0f18;
+    --bg-alerta-normal: #081224;
+    --bg-alerta-perigo: #2e0808;
+    --borda-painel: #1c273b;
+    --borda-padrao: #334155;
+    --texto-padrao: #cbd5e1;
+    --texto-claro: white;
+    --texto-secundario: #64748b;
+    --texto-dica: #475569;
+    --azul-neon: #0ea5e9; 
+    --azul-hover: #0284c7;
+    --cinza-btn: #1e293b;
+    --vermelho-alerta: #f01c1c;
+    --laranja-aviso: #f59e0b;
+    --glow-azul: rgba(14, 165, 233, 0.2);
+    --glow-vermelho-fraco: rgba(239, 68, 68, 0.2);
+    --glow-vermelho-forte: rgba(239, 68, 68, 0.7);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif; 
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--texto-padrao);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--azul-neon);
+    font-size: 30px;
+    font-family: "Zen Dots", sans-serif;
+}
+
+header p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+.painel-principal {
+    display: flex;
+    background-color: var(--bg-painel);
+    border: 2px solid var(--borda-painel);
+    border-radius: 40px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-height: 600px;
+}
+
+.controles {
+    width: 380px;
+    padding: 40px 30px;
+    border-right: 2px solid var(--borda-painel); 
+    display: flex;
+    flex-direction: column;
+}
+
+.controles h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--texto-claro);
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    flex: 1;
+    background-color: var(--azul-neon);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover { 
+    background-color: var(--azul-hover); 
+}
+.btn-secundario { 
+    background-color: var(--cinza-btn); 
+}
+.btn-secundario:hover { 
+    background-color: var(--borda-padrao); 
+}
+
+.instrucao {
+    font-size: 13px;
+    color: var(--texto-dica);
+    margin-bottom: 30px;
+}
+
+.alerta {
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--borda-padrao);
+    margin-top: auto;
+}
+
+.status-normal {
+    background-color: var(--bg-alerta-normal);
+    border-left-color: var(--azul-neon);
+}
+
+.status-perigo {
+    background-color: var(--bg-alerta-perigo);
+    border-left-color: var(--vermelho-alerta);
+    animation: piscar-alerta 1s infinite alternate;
+}
+
+.alerta h3 { 
+    font-size: 15px; 
+    margin-bottom: 10px; 
+}
+
+.escondido { 
+    display: none; 
+}
+
+#dadosConflito {
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#dadosConflito span {
+    color: var(--laranja-aviso);
+    font-family: monospace;
+    font-size: 15px;
+}
+
+.radar-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d1322; 
+}
+
+.radar-wrapper {
+    background-color: var(--bg-radar);
+    border: 2px solid var(--borda-painel);
+    border-radius: 50%;
+    width: 550px;
+    height: 550px;
+    box-shadow: 0 0 30px var(--glow-azul);
+    overflow: hidden;
+}
+
+#radarCanvas {
+    display: block;
+    cursor: crosshair;
+}
+
+@keyframes piscar-alerta {
+    0% { box-shadow: 0 0 5px var(--glow-vermelho-fraco); }
+    100% { box-shadow: 0 0 20px var(--glow-vermelho-forte); }
+}

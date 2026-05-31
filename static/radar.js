@@ -7,13 +7,13 @@ let parMaisProximo = null;
 function desenharRadar() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#020617';
+    ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     const centroX = canvas.width / 2;
     const centroY = canvas.height / 2;
 
-    ctx.strokeStyle = 'rgba(16, 185, 129, 0.15)';
+    ctx.strokeStyle = 'rgba(14, 165, 233, 0.15)';
     ctx.lineWidth = 1;
     for (let r = 50; r < canvas.width / 2; r += 70) {
         ctx.beginPath();
@@ -27,14 +27,14 @@ function desenharRadar() {
     ctx.stroke();
 
     pontos.forEach(p => {
-        ctx.fillStyle = '#10b981';
+        ctx.fillStyle = '#0ea5e9';
         ctx.beginPath();
         ctx.arc(p.x, p.y, 4, 0, 2 * Math.PI);
         ctx.fill();
     });
 
     if (parMaisProximo) {
-        ctx.strokeStyle = '#ef4444';
+        ctx.strokeStyle = '#f01c1c';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(parMaisProximo.aviao_1.x, parMaisProximo.aviao_1.y);
@@ -42,7 +42,7 @@ function desenharRadar() {
         ctx.stroke();
 
         [parMaisProximo.aviao_1, parMaisProximo.aviao_2].forEach(p => {
-            ctx.fillStyle = '#ef4444';
+            ctx.fillStyle = '#f01c1c';
             ctx.beginPath();
             ctx.arc(p.x, p.y, 6, 0, 2 * Math.PI);
             ctx.fill();
