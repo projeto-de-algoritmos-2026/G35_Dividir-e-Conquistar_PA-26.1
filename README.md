@@ -10,7 +10,7 @@ Conteúdo da Disciplina: Dividir e Conquistar<br>
 
 ## Vídeo de Apresentação
 
-* 
+* https://youtu.be/vEZY-GC6G5c
 
 ## Sobre 
 
